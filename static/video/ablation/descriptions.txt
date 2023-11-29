@@ -1,0 +1,3 @@
+Jump_up0-2: A person jumps up and then lands.
+Push_fall0-2: The person was pushed but did not fall.
+Salsa0-2: The person does a salsa dance.

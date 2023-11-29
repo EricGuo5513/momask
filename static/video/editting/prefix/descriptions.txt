@@ -1,0 +1,2 @@
+Standing: A person gets up from the ground.
+Warmup: A person is doing warm up.

@@ -1,0 +1,2 @@
+Bow: a person bows.
+Squat: A person squats.

@@ -1,0 +1,2 @@
+Fall: A person falls down and gets back up quickly.
+push: A person is pushed.

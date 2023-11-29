@@ -2,601 +2,556 @@
 <html>
 <head>
   <meta charset="utf-8">
-  
-  <meta property="og:title" content="MDM: Human Motion Diffusion Model"/>
-  <meta property="og:url" content="https://guytevet.github.io/mdm-page/"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MoMask: Generative Masked Modeling of 3D Human Motions</title>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-  <title>Human Motion Diffusion Model</title>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EWRYSDM25P"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    function gtag() {
+      dataLayer.push(arguments);
+    }
 
-  gtag('config', 'G-EWRYSDM25P');
-</script>
-  
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
-  <link rel="icon" href="static/figures/icon2.png">
+        rel="stylesheet">
 
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
 </head>
-
 <body>
 
 
-<section class="publication-header">
-  <div class="hero-body">
-    <div class="container is-max-widescreen">
-      <!-- <div class="columns is-centered"> -->
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">MDM: Human Motion Diffusion Model</h1>
-          <div class="is-size-3 publication-authors">
-            ICLR2023 (Top-25%)
-          </div>
-        </div>
-    </div>
-  </div>
-
-</section>
-
-<section class="publication-author-block">
+<section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">MoMask: Generative Masked Modeling of 3D Human Motions</h1>
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><a href="https://guytevet.github.io/" target="_blank">Guy Tevet</a>,</span>
-                        <span class="author-block"><a href="https://sigal-raab.github.io/" target="_blank">Sigal Raab</a>,</span>
-            <span class="author-block"><a href="https://scholar.google.com/citations?user=VNDhTycAAAAJ&amp;hl=en" target="_blank">Brian Gordon</a>,</span>
-            <span class="author-block"><a href="https://www.linkedin.com/in/yonatan-shafir-2811a3148/" target="_blank">Yonatan Shafir</a>,</span>
-            <span class="author-block"><a href="https://danielcohenor.com/" target="_blank">Daniel Cohen-Or</a></span>,</span>
-            <span class="author-block"><a href="https://www.cs.tau.ac.il/~amberman/" target="_blank">Amit H. Bermano</a>
-
-            
-            
+            <span class="author-block">
+              <a href="https://keunhong.com">Chuan Guo</a><sup>*</sup>,</span>
+            <span class="author-block">
+              <a href="https://utkarshsinha.com">Yuxuan Mu</a><sup>*</sup>,</span>
+            <span class="author-block">
+              <a href="https://jonbarron.info">Muhammad Gohar Javed</a><sup>*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://sofienbouaziz.com">Sen Wang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.danbgoldman.com">Li Cheng</a>,
+            </span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block">Tel Aviv University, Israel</span> 
-            <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
+            <span class="author-block">University of Alberta, Canada</span>
+            <!-- <span class="author-block"><sup>2</sup>Google Research</span> -->
           </div>
-          
-
 
           <div class="column has-text-centered">
             <div class="publication-links">
+              <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2209.14916" target="_blank"
-                  class="external-link button is-normal is-rounded">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                    <i class="ai ai-arxiv"></i>
+                      <i class="ai ai-arxiv"></i>
                   </span>
                   <span>arXiv</span>
                 </a>
               </span>
-
-              
-              <!-- PDF Link. -->
-<!--              <span class="link-block">-->
-<!--                <a href="static/source/MotionCLIP.pdf" target="_blank"-->
-<!--                  class="external-link button is-normal is-rounded">-->
-<!--                  <span class="icon">-->
-<!--                    <i class="fas fa-file-pdf"></i>-->
-<!--                  </span>-->
-<!--                  <span>Paper</span>-->
-<!--                </a>-->
-<!--              </span>-->
-<!--                            </span>-->
-              <!-- </span> -->
-              <!-- Colab Link. -->
+              <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/GuyTevet/motion-diffusion-model" target="_blank"
-                class="external-link button is-normal is-rounded">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span>Code</span>
-              </a>
-
+                <a href="https://github.com/EricGuo5513/momask-codes"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
               </span>
-
+              <!-- Dataset Link. -->
               <span class="link-block">
                 <a href="https://replicate.com/arielreplicate/motion_diffusion_model" target="_blank"
-                class="external-link button is-normal is-rounded">
+                class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                   <i class="fas fa-rocket"></i>
                 </span>
                 <span>Demo</span>
-              </a>
-
+                </a>
               </span>
-              <!-- </span> -->
-              <!-- Colab Link. -->
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 
-<section class="hero is-small">
-  <!~~ <div class="hero-body"> ~~>
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <!~~ <div id="results-carousel" class="carousel results-carousel"> ~~>
-      <div class="container">
-      <div class="item">
-      <div class="column is-centered has-text-centered">
-        <img src="static/figures/teaser.png" alt="MotionCLIP"/>
-      </div>
+      <a href="./static/images/teaser.png"><img src = "./static/images/teaser.png" height="400px"></img></href></a><br>
+    </div>
+      <p>
+        We introduce MoMask, a novel masked modeling framework for text-driven 3D human motion generation. In MoMask, a hierarchical quantization scheme is employed to represent human motion as multi-layer discrete motion tokens with high-fidelity details. Starting at the base layer, with a sequence of motion tokens obtained by vector quantization, the residual tokens of increasing orders are derived and stored at the subsequent layers of the hierarchy. This is consequently followed by two distinct bidirectional transformers. For the base-layer motion tokens, a Masked Transformer is designated to predict randomly masked motion tokens conditioned on text input at training stage. During generation (i.e. inference) stage, starting from an empty sequence, our Masked Transformer iteratively fills up the missing tokens; Subsequently, a Residual Transformer learns to progressively predict the next-layer tokens based on the results from current layer. Extensive experiments demonstrate that MoMask outperforms the state-of-art methods on the text-to-motion generation task, with an FID of 0.045 (vs e.g. 0.141 of T2M-GPT) on the HumanML3D dataset, and 0.228 (vs 0.514) on KIT-ML, respectively. MoMask can also be seamlessly applied in related tasks without further model fine-tuning, such as text-guided temporal inpainting. 
+      </p>
+  </div>
+</section>
 
+
+
+<section class="section is-light is-small">
+  <div class="container is-max-desktop">
+    <center><h2 class="title is-3">Model</h2></center>
+    <div class="hero-body">
+      <a href="./static/images/model.png"><img src = "./static/images/model.png" height="400px"></img></href></a><br>
     </div>
   </div>
- <!~~  </div> ~~>
-  </div>
-  </div>
- <!~~  </div> ~~>
-</section>
- -->
+    <!--/ Abstract. -->
 
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <div class="item">
-          <p style="margin-bottom: 30px">
-<!-- 
-        <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/MDM-page.mp4"
-          type="video/mp4">
-        </video>
- -->
-        <iframe width="720" height="405" src="https://www.youtube.com/embed/rVkIDj5wgjs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </p>
+</section>
+
+
+<section class="hero is-small is-light">
+  <center><h2 class="title is-3">Gallery of Generation</h2></center>
+  <div class="hero-body">
+
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="column is-centered has-text-centered">
+          <p><b> A character is running on a treadmill.</b></p><br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/3.mp4" type="video/mp4">
+          </video>
         </div>
-        <h2 class="title is-3">Abstract</h2>
+        <div class="column is-centered has-text-centered">
+          <p><b> The person holds its left foot with its left hand, puts its right foot up and left hand up too.</b></p>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/6.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A person stands for a few seconds and picks up its arms and shakes them.</b></p>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> This person kicks with their right leg then jabs several times.</b></p>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/0.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A person walks with a limp, their left leg gets injured.</b></p>
+          <br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/4.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A person walks in a clockwise circle and stops where he began.</b></p>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/7.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A man bends down and picks something up with his right hand.</b></p>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/8.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> The man walked forward, spun right on one foot and walked back to his original position.</b></p>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/9.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A person stands, crosses left leg in front of the right, lowering themselves until they are sitting, both hands on the floor before standing and uncrossing legs.</b></p>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A man is walking forward then steps over an object, then continues walking forward.</b></p>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/10.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A person repeatedly blocks their face with their right arm.</b></p>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/5.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b>This person takes 4 steps forward starting with their right foot.</b></p>
+          <!-- <br> -->
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/11.mp4" type="video/mp4">
+          </video>
+        </div><div class="column is-centered has-text-centered">
+          <p><b> The person takes 4 steps backwards.</b></p>
+          <br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/14.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> The person did a kick spin to the left.</b></p>
+          <br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/12.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A figure stretches its hands and arms above its head.</b></p>
+          <br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/gallery/13.mp4" type="video/mp4">
+          </video>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small is-light">
+  <center><h2 class="title is-3">Diversity</h2></center>
+  <div class="hero-body">
+
+    <div class="container">
+      <div id="results-carousel1" class="carousel results-carousel">
+        <div class="column is-centered has-text-centered">
+          <p><b> A person jumps up and then lands.</b></p><br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/diversity/jump_up0.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A person jumps up and then lands.</b></p><br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/diversity/jump_up1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A person jumps up and then lands.</b></p><br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/diversity/jump_up2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A person was pushed but did not fall.</b></p><br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/diversity/push_fall0.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A person was pushed but did not fall.</b></p><br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/diversity/push_fall1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> A person was pushed but did not fall.</b></p><br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/diversity/push_fall2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> The person does a salsa dance.</b></p><br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/diversity/salsa0.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <p><b> The person does a salsa dance.</b></p><br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/diversity/salsa1.mp4" type="video/mp4">
+          </video>
+        </div><div class="column is-centered has-text-centered">
+          <p><b> The person does a salsa dance.</b></p>
+          <br>
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/diversity/salsa2.mp4" type="video/mp4">
+          </video>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small">
+  <center><h2 class="title is-3">Comparisons</h2></center>
+  <div class="hero-body">
+    <div class="container">
+      <center><p><b> This person stumbles left and right while moving forward.</b></p></center>
+      <div id="results-carousel1" class="carousel results-carousel">
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/00/MoMask.mp4" type="video/mp4">
+          </video>
+          <span><b>Ours (MoMask)</b></span>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/00/MDM.mp4" type="video/mp4">
+          </video>
+          <span>MDM</span>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/00/T2M-GPT.mp4" type="video/mp4">
+          </video>
+          <span>T2M-GPT</span>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/00/MLD.mp4" type="video/mp4">
+          </video>
+          <span>MLD</span>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <center><p><b> A person has their forearms raised in front of them, then lowers them.</b></p></center>
+      <div id="results-carousel1" class="carousel results-carousel">
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/01/MoMask.mp4" type="video/mp4">
+          </video>
+          <span><b>Ours (MoMask)</b></span>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/01/MDM.mp4" type="video/mp4">
+          </video>
+          <span>MDM</span>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/01/T2M-GPT.mp4" type="video/mp4">
+          </video>
+          <span>T2M-GPT</span>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/01/MLD.mp4" type="video/mp4">
+          </video>
+          <span>MLD</span>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <center><p><b> A person grabbed the leg and did something.</b></p></center>
+      <div id="results-carousel1" class="carousel results-carousel">
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/02/MoMask.mp4" type="video/mp4">
+          </video>
+          <span><b>Ours (MoMask)</b></span>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/02/MDM.mp4" type="video/mp4">
+          </video>
+          <span>MDM</span>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/02/T2M-GPT.mp4" type="video/mp4">
+          </video>
+          <span>T2M-GPT</span>
+        </div>
+        <div class="column is-centered has-text-centered">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="./static/video/comparison/02/MLD.mp4" type="video/mp4">
+          </video>
+          <span>MLD</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <center><h2 class="title is-3">Ablation Analysis</h2></center>
+
+        <!-- Interpolating. -->
+        <h3 class="title is-4">Reconstruction</h3>
         <div class="content has-text-justified">
           <p>
-            Natural and expressive human motion generation is the holy grail of computer animation.
-It is a challenging task, due to the diversity of possible motion, human perceptual sensitivity to it, and the difficulty of accurately describing it. Therefore, current generative solutions are either low-quality or limited in expressiveness. 
-Diffusion models, which have already shown remarkable generative capabilities in other domains, are promising candidates for human motion due to their many-to-many nature, but they tend to be resource hungry and hard to control. 
-In this paper, we introduce Motion Diffusion Model (MDM), a carefully adapted classifier-free diffusion-based generative model for the human motion domain. 
-MDM is transformer-based, combining insights from motion generation literature. 
-A notable design-choice is the prediction of the sample, rather than the noise, in each diffusion step. This facilitates the use of established geometric losses on the locations and velocities of the motion, such as the foot contact loss. As we demonstrate, MDM is a generic approach, enabling different modes of conditioning, and different generation tasks. We show that our model is trained with lightweight resources and yet achieves state-of-the-art results on leading benchmarks for text-to-motion and action-to-motion.</p>
+            We can also animate the scene by interpolating the deformation latent codes of two input
+            frames. Use the slider here to linearly interpolate between the left frame and the right
+            frame.
+          </p>
+          <div class="content has-text-centered">
+          <video id="replay-video"
+                 controls
+                 muted
+                 preload
+                 playsinline
+                 width="80%">
+            <source src="./static/video/ablation/reconstruction.mp4"
+                    type="video/mp4">
+          </video>
         </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-  </div>
-</section>
+        </div>
 
-
-
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-
-      <div class="column is-centered has-text-centered">
-        <img src="static/figures/mdm_arch.png" alt="cars peace"/>
-      </div>
-     
-    
-  </div>
-</div>
-</div>
-</section>
-
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-<!--         <h2 class="title is-3">How does it work?</h2> -->
+        
+        <h3 class="title is-4">Re-rendering the input video</h3>
         <div class="content has-text-justified">
           <p>
-The MDM framework has a generic design enabling different forms of conditioning. 
-We showcase three tasks: text-to-motion, action-to-motion, and unconditioned generation. 
-We train the model in a classifier-free manner, which enables trading-off diversity to fidelity, and sampling both conditionally and unconditionally from the same model.
-In the text-to-motion task, our model generates coherent motions that achieve state-of-the-art results on the HumanML3D and KIT benchmarks. 
-Moreover, our user study shows that human evaluators 
-prefer our generated motions over real motions 42% of the time.
-In action-to-motion, MDM outperforms the state-of-the-art, even though they were specifically designed for this task, 
-on the common HumanAct12 and UESTC benchmarks.
-</p>
-        <div class="columns is-centered has-text-centered">
-            <div class="item">
-          <p style="margin-bottom: 30px">
-<!--
-        <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/MDM-page.mp4"
-          type="video/mp4">
-        </video>
- --><br><br>
-<iframe width="720" height="405" src="https://www.youtube.com/embed/9MqPxlwx2CQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </p>
-        </div>
-            </div>
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-  </div>
-</section> 
-
-
-<!-- 
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-
-      <div class="column is-centered has-text-centered">
-        <img src="static/figures/sampling.png" alt="cars peace"/>
-      </div>
-     
-    
-  </div>
-</div>
-</div>
-</section>
- -->
-
-
-
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-      <div class="column is-centered has-text-centered">
-      	<p><b> “A person walks forward, bends down to pick something up off the ground.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/bend.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-centered has-text-centered">
-      	<p><b>“a person turns to his right and paces back and forth.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/turn.mp4"
-          type="video/mp4">
-      </div>
-      <div class="column is-centered has-text-centered">
-      	<p><b>“A person punches in a manner consistent with martial arts.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/punch.mp4"
-          type="video/mp4">
-      </div>
-  </div>
-</div>
-</div>
-</section>
-
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Text-to-Motion</h2>
-          <p>
-Text-to-motion is the task of generating motion given an input text prompt. 
-The output motion is expected to be both implementing the textual description, and a valid sample from the data distribution (i.e. adhering to general human abilities and the rules of physics). 
-In addition, for each text prompt, we also expect a distribution of motions matching it, rather than just a single result.
+            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
+            viewpoint such as a stabilized camera by playing back the training deformations.
           </p>
         </div>
+        <div class="content has-text-centered">
+          <video id="replay-video"
+                poster="./static/video/ablation/generation.jpg" 
+                 controls
+                 muted
+                 preload
+                 playsinline
+                 width="80%">
+            <source src="./static/video/ablation/generation.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+
+        <!-- <video width="100%" height="100%" source="" src="./files/video/ablation/reconstruction.mp4" type="video/mp4" loop="true" controls muted></video> -->
+        <!--/ Re-rendering. -->
+
       </div>
     </div>
-    <!--/ Abstract. -->
-  </div>
-</section> 
-
-
-
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-      <div class="column is-centered has-text-centered">
-      	<p><b> “A person kicks.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/kick1.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-centered has-text-centered">
-      	<p><b> “A person kicks.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/kick2.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-            <div class="column is-centered has-text-centered">
-      	<p><b> “A person kicks.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/kick3.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-            <div class="column is-centered has-text-centered">
-      	<p><b> “A person kicks.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/kick4.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-            <div class="column is-centered has-text-centered">
-      	<p><b> “A person kicks.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/kick5.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-            <div class="column is-centered has-text-centered">
-      	<p><b> “A person kicks.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/kick6.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-            <div class="column is-centered has-text-centered">
-      	<p><b> “A person kicks.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/kick7.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-            <div class="column is-centered has-text-centered">
-      	<p><b> “A person kicks.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/kick8.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-            <div class="column is-centered has-text-centered">
-      	<p><b> “A person kicks.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/kick9.mp4"
-          type="video/mp4">
-        </video>
-      </div>
+    <!--/ Animation. -->
 
   </div>
-</div>
-</div>
 </section>
 
-
-
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-      <div class="column is-centered has-text-centered">
-      	<p><b> “A person is skipping rope.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/rope1.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-centered has-text-centered">
-      	<p><b> “A person is skipping rope.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/rope2.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-centered has-text-centered">
-      	<p><b> “A person is skipping rope.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/rope3.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-centered has-text-centered">
-      	<p><b> “A person is skipping rope.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/rope4.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-            <div class="column is-centered has-text-centered">
-      	<p><b> “A person is skipping rope.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/rope5.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-centered has-text-centered">
-      	<p><b> “A person is skipping rope.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/rope6.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-            <div class="column is-centered has-text-centered">
-      	<p><b> “A person is skipping rope.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/rope7.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-centered has-text-centered">
-      	<p><b> “A person is skipping rope.”</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/rope8.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-
-
-
-  </div>
-</div>
-</div>
-</section>
-
-
-<section class="section hero is-light">
+<section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Action-to-Motion</h2>
-          <p>
-Action-to-motion is the task of generating motion given an input action class, represented by a scalar. 
-The output motion should faithfully animate the input action, and at the same time be natural and reflect the distribution of the dataset on which the model is trained.
-          </p>
+
+    <center><h2 class="title is-3">Application: Temporal Inpainting</h2></center>
+    <h3 class="title is-4">Inbetweening</h2>
+    (<span style="color:purple;">Purple</span>=Input, <span style="color:#76D7C4;">Cyan</span>=Synthesis)
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "A person falls down and gets back up quickly."</b></p></center>
+          <video id="dollyzoom" controls muted loop playsinline height="40%">
+              <source src="./static/video/editting/inbetweening/fall.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "A person is pushed."</b></p></center>
+          <video id="dollyzoom" controls muted loop playsinline height="40%">
+              <source src="./static/video/editting/inbetweening/push.mp4"
+                      type="video/mp4">
+            </video>
         </div>
       </div>
     </div>
-    <!--/ Abstract. -->
-  </div>
-</section> 
 
-
-
-
-
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-      <div class="column is-centered has-text-centered">
-      	<p><b> (Class) Run</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/run.mp4"
-          type="video/mp4">
-        </video>
+    <h3 class="title is-4">Prefix</h2>
+    (<span style="color:purple;">Purple</span>=Input, <span style="color:#76D7C4;">Cyan</span>=Synthesis)
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "A person gets up from the ground."</b></p></center>
+          <video id="dollyzoom" controls muted loop playsinline height="40%">
+              <source src="./static/video/editting/prefix/standing.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
       </div>
-      <div class="column is-centered has-text-centered">
-      	<p><b> (Class) Warm up</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/warmup.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-centered has-text-centered">
-      	<p><b> (Class) Sit</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/sit.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-centered has-text-centered">
-      	<p><b> (Class) Jump</b></p>
-                <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/jump.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-  </div>
-</div>
-</div>
-</section>
-
-
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Motion Editing</h2>
-          <p>
-          We also demonstrate completion and editing. By adapting diffusion image-inpainting, we set a motion prefix and suffix, and use our model to fill in the gap. 
-Doing so under a textual condition guides MDM to fill the gap with a specific motion that still maintains the semantics of the original input. 
-By performing inpainting in the joints space rather than temporally, we also demonstrate the semantic editing of specific body parts, without changing the others. 
-          </p>
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "A person is doing warm up"</b></p></center>
+          <video id="dollyzoom" controls muted loop playsinline height="40%">
+              <source src="./static/video/editting/prefix/warmup.mp4"
+                      type="video/mp4">
+            </video>
         </div>
       </div>
     </div>
-    <!--/ Abstract. -->
+
+    <h3 class="title is-4">Suffix</h2>
+    (<span style="color:purple;">Purple</span>=Input, <span style="color:#76D7C4;">Cyan</span>=Synthesis)
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "A person bows"</b></p></center>
+          <video id="dollyzoom" controls muted loop playsinline height="40%">
+              <source src="./static/video/editting/suffix/bow.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "A person squats"</b></p></center>
+          <video id="dollyzoom" controls muted loop playsinline height="40%">
+              <source src="./static/video/editting/suffix/squat.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
   </div>
-</section> 
-
-
-<section class="hero is-small">
-
-      <div class="column is-centered has-text-centered">
-      	<h3 class="title is-4">Upper body editing (lower body is fixed)</h3>
-      	<p>(Blue=Input, Gold=Synthesis)</p>
-         <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/edit_upper.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-
-</section>
-
-
-<section class="section hero is-small">
-<div class="container is-max-desktop">
-      <div class="column is-centered has-text-centered">
-      	<h3 class="title is-4">Motion In-Betweening</h3>
-      	<p>(Blue=Input, Gold=Synthesis)</p>
-         <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/figures/in_between.mp4"
-          type="video/mp4">
-        </video>
-      </div>
-</div>
 </section>
 
 
 
 <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>
-@inproceedings{
-tevet2023human,
-title={Human Motion Diffusion Model},
-author={Guy Tevet and Sigal Raab and Brian Gordon and Yoni Shafir and Daniel Cohen-or and Amit Haim Bermano},
-booktitle={The Eleventh International Conference on Learning Representations },
-year={2023},
-url={https://openreview.net/forum?id=SJ1kSyO2jwu}
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+  title     = {Nerfies: Deformable Neural Radiance Fields},
+  journal   = {ICCV},
+  year      = {2021},
 }</code></pre>
-    </div>
+  </div>
 </section>
 
 
-
-
 <footer class="footer">
- <!--  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-      href="https://homes.cs.washington.edu/~kpar/nerfies/videos/nerfies_paper.pdf">
-      <i class="fas fa-file-pdf"></i>
-    </a>
-    <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-      <i class="fab fa-github"></i>
-    </a>
-  </div> -->
   <div class="columns is-centered">
     <div class="column is-8">
       <div class="content">
@@ -615,21 +570,5 @@ url={https://openreview.net/forum?id=SJ1kSyO2jwu}
 </div>
 </footer>
 
-
-  <script type="text/javascript">
-    var sc_project=12351448; 
-    var sc_invisible=1; 
-    var sc_security="c676de4f"; 
-  </script>
-  <script type="text/javascript"
-  src="https://www.statcounter.com/counter/counter.js"
-  async></script>
-  <noscript><div class="statcounter"><a title="Web Analytics"
-    href="https://statcounter.com/" target="_blank"><img
-    class="statcounter"
-    src="https://c.statcounter.com/12351448/0/c676de4f/1/"
-    alt="Web Analytics"></a></div></noscript>
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+</body>
+</html>

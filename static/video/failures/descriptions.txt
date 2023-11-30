@@ -1,2 +1,0 @@
-crouch: A person is crouched and stands then resumes the crouched position.
-spin_dance: A person does a spin dance.

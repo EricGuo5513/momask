@@ -109,12 +109,33 @@
 
 <section class="hero teaser">
   <div class="container is-max-desktop">
-    <div class="hero-body">
-      <a href="./static/images/teaser.png"><img src = "./static/images/teaser.png" height="100%"></img></href></a><br>
+    
+        <!-- <center><h2 class="title is-3">Abstract</h2></center> -->
+    <div class="hero-body has-text-centered">
+        <a href="./static/images/teaser.png"><img src = "./static/images/teaser.png" height="80%"></img></href></a><br>
+
     </div>
-      <p>
-        We introduce MoMask, a novel masked modeling framework for text-driven 3D human motion generation. In MoMask, a hierarchical quantization scheme is employed to represent human motion as multi-layer discrete motion tokens with high-fidelity details. Starting at the base layer, with a sequence of motion tokens obtained by vector quantization, the residual tokens of increasing orders are derived and stored at the subsequent layers of the hierarchy. This is consequently followed by two distinct bidirectional transformers. For the base-layer motion tokens, a Masked Transformer is designated to predict randomly masked motion tokens conditioned on text input at training stage. During generation (i.e. inference) stage, starting from an empty sequence, our Masked Transformer iteratively fills up the missing tokens; Subsequently, a Residual Transformer learns to progressively predict the next-layer tokens based on the results from current layer. Extensive experiments demonstrate that MoMask outperforms the state-of-art methods on the text-to-motion generation task, with an FID of 0.045 (vs e.g. 0.141 of T2M-GPT) on the HumanML3D dataset, and 0.228 (vs 0.514) on KIT-ML, respectively. MoMask can also be seamlessly applied in related tasks without further model fine-tuning, such as text-guided temporal inpainting. 
-      </p>
+
+    <p>
+      We introduce MoMask, a novel masked modeling framework for text-driven 3D human motion generation. In MoMask, a hierarchical quantization scheme is employed to represent human motion as multi-layer discrete motion tokens with high-fidelity details. Starting at the base layer, with a sequence of motion tokens obtained by vector quantization, the residual tokens of increasing orders are derived and stored at the subsequent layers of the hierarchy. This is consequently followed by two distinct bidirectional transformers. For the base-layer motion tokens, a Masked Transformer is designated to predict randomly masked motion tokens conditioned on text input at training stage. During generation (i.e. inference) stage, starting from an empty sequence, our Masked Transformer iteratively fills up the missing tokens; Subsequently, a Residual Transformer learns to progressively predict the next-layer tokens based on the results from current layer. Extensive experiments demonstrate that MoMask outperforms the state-of-art methods on the text-to-motion generation task, with an FID of 0.045 (vs e.g. 0.141 of T2M-GPT) on the HumanML3D dataset, and 0.228 (vs 0.514) on KIT-ML, respectively. MoMask can also be seamlessly applied in related tasks without further model fine-tuning, such as text-guided temporal inpainting. 
+    </p>
+    <br>
+    <!-- <div class="content has-text-centered">
+      <video id="replay-video"
+            autoplay 
+             controls
+             playsinline
+             width="80%">
+        <source src="./static/video/demo.mp4"
+                type="video/mp4">
+      </video>
+    </div> -->
+    <div id="video-container">
+      <video id="video" muted controls loop playsinline>
+        <source src="./static/video/demo.mp4" type="video/mp4">
+      </video>
+    </div>
+    
   </div>
 </section>
 
@@ -256,245 +277,6 @@
   </div>
 </section>
 
-<!-- <section class="hero is-small is-light">
-  <center><h2 class="title is-3">Diversity</h2></center>
-  <div class="hero-body">
-
-    <div class="container">
-      <div id="results-carousel1" class="carousel results-carousel">
-        <div class="column is-centered has-text-centered">
-          <p><b> A person jumps up and then lands.</b></p><br>
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/diversity/jump_up0.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <p><b> A person jumps up and then lands.</b></p><br>
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/diversity/jump_up1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <p><b> A person jumps up and then lands.</b></p><br>
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/diversity/jump_up2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <p><b> A person was pushed but did not fall.</b></p><br>
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/diversity/push_fall0.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <p><b> A person was pushed but did not fall.</b></p><br>
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/diversity/push_fall1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <p><b> A person was pushed but did not fall.</b></p><br>
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/diversity/push_fall2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <p><b> The person does a salsa dance.</b></p><br>
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/diversity/salsa0.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <p><b> The person does a salsa dance.</b></p><br>
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/diversity/salsa1.mp4" type="video/mp4">
-          </video>
-        </div><div class="column is-centered has-text-centered">
-          <p><b> The person does a salsa dance.</b></p>
-          <br>
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/diversity/salsa2.mp4" type="video/mp4">
-          </video>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-</section> -->
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <center><h2 class="title is-3">Comparisons</h2></center><br>
-  <!-- <div class="hero-body">
-    <div class="container">
-      <center><p><b> This person stumbles left and right while moving forward.</b></p></center>
-      <div id="results-carousel1" class="carousel results-carousel">
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/00/MoMask.mp4" type="video/mp4">
-          </video>
-          <span style="color:red"><b>Ours (MoMask)</b></span>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/00/MDM.mp4" type="video/mp4">
-          </video>
-          <span>MDM</span>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/00/T2M-GPT.mp4" type="video/mp4">
-          </video>
-          <span>T2M-GPT</span>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/00/MLD.mp4" type="video/mp4">
-          </video>
-          <span>MLD</span>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <center><p><b> A person has their forearms raised in front of them, then lowers them.</b></p></center>
-      <div id="results-carousel1" class="carousel results-carousel">
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/01/MoMask.mp4" type="video/mp4">
-          </video>
-          <span style="color:red"><b>Ours (MoMask)</b></span>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/01/MDM.mp4" type="video/mp4">
-          </video>
-          <span>MDM</span>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/01/T2M-GPT.mp4" type="video/mp4">
-          </video>
-          <span>T2M-GPT</span>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/01/MLD.mp4" type="video/mp4">
-          </video>
-          <span>MLD</span>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <center><p><b> A person grabbed the leg and did something.</b></p></center>
-      <div id="results-carousel1" class="carousel results-carousel">
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/02/MoMask.mp4" type="video/mp4">
-          </video>
-          <span style="color:red"><b>Ours (MoMask)</b></span>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/02/MDM.mp4" type="video/mp4">
-          </video>
-          <span>MDM</span>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/02/T2M-GPT.mp4" type="video/mp4">
-          </video>
-          <span>T2M-GPT</span>
-        </div>
-        <div class="column is-centered has-text-centered">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="./static/video/comparison/02/MLD.mp4" type="video/mp4">
-          </video>
-          <span>MLD</span>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <div class="content has-text-justified">
-      <p>
-        We compare MoMask against three strong baseline approaches, spanning diffusion models (e.g., <a href="https://guytevet.github.io/mdm-page/">MDM</a>, <a href="https://chenxin.tech/mld/">MLD</a>), and autoregressive models (e.g., <a href="https://mael-zys.github.io/T2M-GPT/">T2M-GPT</a>). In contrast to these existing works, MoMask excels in capturing nuanced language concepts, resulting in the generation of more realistic motions.
-      </p>
-      <div class="content has-text-centered">
-        <video id="replay-video"
-               controls
-               muted
-               preload
-               playsinline
-               width="80%">
-          <source src="./static/video/comparison.mp4"
-                  type="video/mp4">
-        </video>
-      </div>
-    </div>
-  </div>
-  
-
-</section>
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-
-    <!-- Animation. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <center><h2 class="title is-3">Impact of Residual Quantization</h2></center>
-
-        <!-- Interpolating. -->
-        <h3 class="title is-4">Reconstruction</h3>
-        <div class="content has-text-justified">
-          <p>
-            We investigate the impact of varying the number of residual quantization layers on reconstruction results. In the visual comparison, we present the ground truth motion alongside motions recovered from <b>different</b> RVQ-VAEs with 5 residual layers, 3 residual layers, and no residual layers (traditional VQ-VAE), respectively. The result demonstrates that RVQ significantly reduces reconstruction errors, leading to high-fidelity motion tokenization.
-          </p>
-          <div class="content has-text-centered">
-            <video id="replay-video"
-]                   controls
-                   muted
-                   preload
-                   playsinline
-                   width="80%">
-              <source src="./static/video/ablation/reconstruction.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-        </div>
-
-        
-        <h3 class="title is-4">Generation</h3>
-        <div class="content has-text-justified">
-          <p>
-            Utilizing the pre-trained RVQ model, we conduct a visual comparison of generated motions by considering different combinations of tokens, specifically focusing on the base-layer tokens alone, base-layer tokens combined with the first 3 residual-layer tokens and the first 5 residual-layer tokens. The observation indicates that the absence of residual tokens may result in the failure to accurately perform subtle actions, as illustrated by the case of <span style="color:blue">stumbling</span> in this example.
-          </p>
-        </div>
-        <div class="content has-text-centered">
-          <center><p><b> A man walks forward, <span style="color:blue">stumbles</span> to the right, and then regains his balance and keeps walking forward.</b></p></center>
-          <video id="replay-video"
-                poster="./static/video/ablation/generation.jpg" 
-                 controls
-                 muted
-                 preload
-                 playsinline
-                 width="80%">
-            <source src="./static/video/ablation/generation.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-
-        <!-- <video width="100%" height="100%" source="" src="./files/video/ablation/reconstruction.mp4" type="video/mp4" loop="true" controls muted></video> -->
-        <!--/ Re-rendering. -->
-
-      </div>
-    </div>
-    <!--/ Animation. -->
-
-  </div>
-</section>
-
 <section class="section">
   <div class="container is-max-desktop">
 
@@ -505,11 +287,12 @@
     <br>
     <h3 class="title is-4">Inbetweening</h2>
     (<span style="color:purple;">Purple</span>=Input, <span style="color:#76D7C4;">Cyan</span>=Synthesis)
+    <br>
     <div class="columns is-centered">
       <div class="column">
-        <div class="content">
+        <div id="video-container">
           <center><p><b> + "A person falls down and gets back up quickly."</b></p></center>
-          <video poster="" id="fall" controls muted loop playsinline height="40%">
+          <video id="video" controls muted loop playsinline height="40%">
               <source src="./static/video/editting/inbetweening/fall.mp4"
                       type="video/mp4">
             </video>
@@ -574,6 +357,91 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <center><h2 class="title is-3">Impact of Residual Quantization</h2></center>
+
+        <!-- Interpolating. -->
+        <h3 class="title is-4">Reconstruction</h3>
+        <div class="content has-text-justified">
+          <p>
+            We investigate the impact of varying the number of residual quantization layers on reconstruction results. In the visual comparison, we present the ground truth motion alongside motions recovered from <b>different</b> RVQ-VAEs with 5 residual layers, 3 residual layers, and no residual layers (traditional VQ-VAE), respectively. The result demonstrates that RVQ significantly reduces reconstruction errors, leading to high-fidelity motion tokenization.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <div class="publication-video">
+            <video id="replay-video"
+                 controls
+                 muted
+                 preload
+                 playsinline
+                 width="100%">
+            <source src="./static/video/ablation/reconstruction.mp4"
+                    type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <h3 class="title is-4">Generation</h3>
+        <div class="content has-text-justified">
+          <p>
+            Utilizing the pre-trained RVQ model, we conduct a visual comparison of generated motions by considering different combinations of tokens, specifically focusing on the base-layer tokens alone, base-layer tokens combined with the first 3 residual-layer tokens and the first 5 residual-layer tokens. The observation indicates that the absence of residual tokens may result in the failure to accurately perform subtle actions, as illustrated by the case of <span style="color:blue">stumbling</span> in this example.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <center><p><b> A man walks forward, <span style="color:blue">stumbles</span> to the right, and then regains his balance and keeps walking forward.</b></p></center>
+          <video id="replay-video"
+                poster="./static/video/ablation/generation.jpg" 
+                 controls
+                 muted
+                 preload
+                 playsinline
+                 width="100%">
+            <source src="./static/video/ablation/generation.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+
+        <!-- <video width="100%" height="100%" source="" src="./files/video/ablation/reconstruction.mp4" type="video/mp4" loop="true" controls muted></video> -->
+        <!--/ Re-rendering. -->
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <center><h2 class="title is-3">Comparisons</h2></center><br>
+    <div class="content has-text-justified">
+      <p>
+        We compare MoMask against three strong baseline approaches, spanning diffusion models (e.g., MDM, MLD), and autoregressive models (e.g., T2M-GPT). In contrast to these existing works, MoMask excels in capturing nuanced language concepts, resulting in the generation of more realistic motions. <br>
+      </p>
+      <div class="content has-text-centered">
+        <video id="replay-video"
+               controls
+               muted
+               preload
+               playsinline
+               width="80%">
+          <source src="./static/video/comparison.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+
+
+
 
 
 <section class="section" id="BibTeX">
@@ -607,6 +475,23 @@
 </div>
 </div>
 </footer>
+
+<script>
+      var videoContainer = document.getElementById('video-container');
+      var video = document.getElementById('video');
+
+      var videoOffset = videoContainer.offsetTop;
+
+      window.addEventListener('scroll', function() {
+        var scrollPosition = window.scrollY || window.pageYOffset;
+
+        if (scrollPosition >= videoOffset) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+    </script>
 
 </body>
 </html>
